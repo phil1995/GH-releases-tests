@@ -12,12 +12,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build
-        run: echo ${{ github.sha }} > Release.txt
-      - name: Test
         run: |
           mkdir public && cd public
-          cat 1.txt
-          cat 2.txt
+          echo "1" > 1.txt
+          echo "2" > 2.txt
           echo "CREATED_FILES=public/$(ls .)" >> $GITHUB_ENV
       - name: Release
         uses: softprops/action-gh-release@v1
