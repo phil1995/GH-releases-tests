@@ -13,14 +13,14 @@ jobs:
         uses: actions/checkout@v3
       - name: Build
         run: |
-          mkdir public
-          echo "1" > public/1.txt
-          echo "2" > public/2.txt
-          DIR_LISTING=$(ls \
-          -1)
-          echo "CREATED_FILES=${DIR_LISTING}" >> $GITHUB_ENV
-      - name: Release
-        uses: softprops/action-gh-release@v1
+          mkdir release
+          echo "1" > release/1.txt
+          echo "2" > release/2.txt
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: |
-            ${CREATED_FILES}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          pattern: "release/*
