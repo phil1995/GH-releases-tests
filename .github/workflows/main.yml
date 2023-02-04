@@ -17,10 +17,19 @@ jobs:
           echo "1" > release/1.txt
           echo "2" > release/2.txt
       - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+         tag_name: ${{ github.ref }}
+         release_name: Release ${{ github.ref }}
+         body: Auto generated release
+      - name: Upload assets to release
+        uses: csexton/release-asset-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release-url: ${{ steps.create_release.outputs.upload_url }}
           pattern: "release/*
