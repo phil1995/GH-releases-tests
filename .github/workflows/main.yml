@@ -12,9 +12,9 @@ jobs:
       - name: Build
         run: |
           mkdir release
-          echo "1" > release/1.txt
-          echo "2" > release/2.txt
+          echo "New 1" > release/1.txt
+          echo "New 3" > release/3.txt
       - name: Upload assets to release
-        run: gh release upload nightly release/*
+        run: gh release upload nightly release/* --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
