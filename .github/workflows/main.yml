@@ -16,3 +16,5 @@ jobs:
           echo "2" > release/2.txt
       - name: Upload assets to release
         run: gh release upload nightly public/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
