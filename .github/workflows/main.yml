@@ -14,6 +14,8 @@ jobs:
           mkdir release
           echo "New 1" > release/1.txt
           echo "New 3" > release/3.txt
+      - name: failing download
+        run: curl dev.nutritionprivacy.de/productPreviews -f
       - name: Upload assets to release
         run: gh release upload nightly release/* --clobber
         env:
